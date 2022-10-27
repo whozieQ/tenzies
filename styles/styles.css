@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #0B2434;
+    margin: 20px 30px;
+
+}
+main {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+h1{
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #2B283A;
+    margin-bottom: 0;
+}
+h2{
+    margin: 0;
+}
+p{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: #4A4E74;
+    font-size: 14px;
+    margin-bottom: 2rem;
+}
+.dice--container{
+    width: 80%;
+    justify-content: center;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(5, 50px);
+    grid-template-rows: 50px 50px;
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+}
+.die{
+    background: #FFFFFF;
+    height: 50px;
+    width: 50px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 3.81277px;
+    border: none;
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #2B283A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.die.locked{
+    background: #59E391;
+}
+.rollDice{
+    height: 50px;
+    width: 120px;
+    border: none;
+    border-radius: 6px;
+    background-color: #5035FF;
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Karla', sans-serif;
+    cursor: pointer;
+}
+
+.rollDice:focus {
+    outline: none;
+}
+
+.rollDice:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+.main--instructions{
+    padding: 0 20px;
+    margin: 0;
+    text-align: center;
+}

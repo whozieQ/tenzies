@@ -1,4 +1,5 @@
 import React from 'react'
+import Confetti from 'react-confetti'
 import Die from './Die'
 
 
@@ -27,6 +28,7 @@ export default function App() {
 // re-rolls the value for each unlocked die in the array
 //and updates the number of rolls count
     function rollUnlockedDice(newGame){
+        console.log(newGame)
         setDiceArray(oldArray => oldArray.map(die => {
             return !newGame && die.locked ? die : getNewDie()
         }))
@@ -45,8 +47,6 @@ export default function App() {
     const [highScore, setHighScore] = React.useState(JSON.parse(localStorage.getItem("tenzies")) || 1000)
 
     React.useEffect(()=>{
-        console.log(highScore)
-        console.log(numAttempts)
         if (tenzies && (highScore > numAttempts)){
                 console.log(`Updating best score from ${highScore} to ${numAttempts}`)
                 localStorage.setItem("tenzies",JSON.stringify(numAttempts))
@@ -69,12 +69,41 @@ export default function App() {
         })
     }
 
+//generate winning status text
+    function getWinningText(){
+        let showBest = true
+        const tries =  `${numAttempts} ${numAttempts === 1 ? "try":"tries"}` 
+        const bestScore = `Best Score: ${highScore}`
+        let message = "Let's play!"
+        if (tenzies){
+            const status = `You got Tenzies in ${tries}` 
+            if (highScore >= numAttempts) {
+                message = `New BEST Score! ${status}!`
+                showBest = false
+            } else {
+                message = `Good try! ${status}. ` 
+                showBest = true
+            }
+        } else {
+            message = `No luck yet after ${tries}`
+            showBest = true
+        }
+        return (
+            <p className="main--status"> 
+                {message} 
+                {showBest && <br />}
+                {showBest && <i>{bestScore}</i>}
+            </p> 
+        )
+
+    }
 
     return (
         <main className="main--container">
+            {tenzies &&  <Confetti />}
             <h1>Tenzies!</h1>
             <p className="main--instructions">Roll until all TEN dice have the same number. Click on a die to lock it into that number.</p>
-            <p className="main--status"> {tenzies ? "You got Tenzies in " : "No luck yet after "}{numAttempts} {numAttempts === 1 ? "try":"tries"}<br/><i>Best Score: {highScore}</i></p>
+            {getWinningText()}
             <div className="dice--container">
                 {getDieElements()} 
             </div>
